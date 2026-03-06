@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import interiorImage from "@/assets/trailer-interior.jpg";
+import trailerImage from "@/assets/onyx-trailer.jpg";
 
 const About = () => (
   <section id="about" className="py-24 bg-background">
@@ -13,8 +13,8 @@ const About = () => (
         >
           <div className="overflow-hidden">
             <img
-              src={interiorImage}
-              alt="Luxury restroom trailer interior with marble countertops and gold fixtures"
+              src={trailerImage}
+              alt="Onyx Restrooms luxury restroom trailer"
               className="w-full h-[500px] object-cover gold-glow"
               loading="lazy"
             />
@@ -35,21 +35,20 @@ const About = () => (
           </h2>
           <div className="w-16 h-px gold-gradient mb-8" />
           <p className="font-body text-muted-foreground leading-relaxed mb-6">
-            Founded with a passion for excellence, we set out to transform the way
-            people experience restroom facilities at events. Our fleet of luxury
-            restroom trailers brings five-star comfort to any location — from
-            elegant weddings and galas to corporate events and film sets.
+            At Onyx Restrooms, we set out to transform the way people experience
+            restroom facilities at events. Our luxury restroom trailer brings
+            five-star comfort to any location — from elegant weddings and galas
+            to corporate events and film sets.
           </p>
           <p className="font-body text-muted-foreground leading-relaxed mb-8">
-            Every trailer is meticulously maintained and features premium finishes
-            including marble countertops, hardwood floors, climate control,
-            designer lighting, and high-end fixtures. Because your guests deserve
-            nothing less.
+            Our trailer is meticulously maintained and features premium finishes
+            including designer lighting, climate control, and high-end fixtures.
+            Because your guests deserve nothing less.
           </p>
           <div className="grid grid-cols-3 gap-6">
             {[
               { number: "500+", label: "Events Served" },
-              { number: "15+", label: "Trailers in Fleet" },
+              { number: "5★", label: "Client Rating" },
               { number: "100%", label: "Satisfaction Rate" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
