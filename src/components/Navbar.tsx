@@ -1,0 +1,61 @@
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+
+const links = [
+  { label: "About", href: "#about" },
+  { label: "Fleet", href: "#fleet" },
+  { label: "Features", href: "#features" },
+  { label: "Testimonials", href: "#testimonials" },
+  { label: "Get a Quote", href: "#quote" },
+];
+
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClick = (href: string) => {
+    setOpen(false);
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      <div className="container mx-auto px-6 flex items-center justify-between h-16">
+        <a href="#" className="font-display text-xl font-bold text-primary tracking-wide">
+          LUXE<span className="text-foreground">LOO</span>
+        </a>
+
+        <div className="hidden md:flex items-center gap-8">
+          {links.map((link) => (
+            <button
+              key={link.href}
+              onClick={() => handleClick(link.href)}
+              className="font-body text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition-colors"
+            >
+              {link.label}
+            </button>
+          ))}
+        </div>
+
+        <button onClick={() => setOpen(!open)} className="md:hidden text-foreground">
+          {open ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {open && (
+        <div className="md:hidden bg-background border-b border-border">
+          {links.map((link) => (
+            <button
+              key={link.href}
+              onClick={() => handleClick(link.href)}
+              className="block w-full text-left px-6 py-3 font-body text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              {link.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;
