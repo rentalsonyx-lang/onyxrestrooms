@@ -1,24 +1,34 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 const QuoteForm = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-    eventDate: "",
     eventType: "",
     guestCount: "",
     message: "",
   });
+  const [dates, setDates] = useState<Date[]>([]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (dates.length === 0) {
+      toast.error("Please select at least one event date.");
+      return;
+    }
     toast.success("Thank you! We'll be in touch within 24 hours.", {
       description: "Your quote request has been received.",
     });
-    setForm({ name: "", email: "", phone: "", eventDate: "", eventType: "", guestCount: "", message: "" });
+    setForm({ name: "", email: "", phone: "", eventType: "", guestCount: "", message: "" });
+    setDates([]);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -77,14 +87,37 @@ const QuoteForm = () => {
                   onChange={handleChange}
                   className={inputClass}
                 />
-                <input
-                  type="date"
-                  name="eventDate"
-                  required
-                  value={form.eventDate}
-                  onChange={handleChange}
-                  className={inputClass}
-                />
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <button
+                      type="button"
+                      className={cn(
+                        inputClass,
+                        "flex items-center justify-between text-left",
+                        dates.length === 0 && "text-muted-foreground"
+                      )}
+                    >
+                      <span className="truncate">
+                        {dates.length === 0
+                          ? "Event Date(s) *"
+                          : dates.length === 1
+                          ? format(dates[0], "MMM d, yyyy")
+                          : `${dates.length} days selected`}
+                      </span>
+                      <CalendarIcon className="w-4 h-4 shrink-0 ml-2 text-muted-foreground" />
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="multiple"
+                      selected={dates}
+                      onSelect={(days) => setDates(days || [])}
+                      disabled={(date) => date < new Date()}
+                      initialFocus
+                      className={cn("p-3 pointer-events-auto")}
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
               <div className="grid md:grid-cols-2 gap-5">
                 <select
