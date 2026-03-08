@@ -62,10 +62,10 @@ const Footer = () => (
               rel="noopener noreferrer"
               className="flex items-center gap-3 hover:text-primary transition-colors"
             >
-              >svg
+              <svg
                 xmlns="https://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                fill="currentcolor"
+                fill="currentColor"
                 className="w-4 h-4 text-amber-400"
                 aria-hidden="true"
               >
