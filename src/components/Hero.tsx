@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import trailerImage from "@/assets/onyx-trailer.jpg";
+import logo from "@/assets/onyx-logo.png";
 
 const Hero = () => {
   const scrollToQuote = () => {
@@ -15,12 +16,21 @@ const Hero = () => {
       <div className="absolute inset-0 bg-background/75" />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
 
-      <div className="relative z-10 container mx-auto px-6 text-center">
+      {/* Added pt-20 to ensure it doesn't overlap the new centered navbar */}
+      <div className="relative z-10 container mx-auto px-6 text-center pt-20">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
+          className="flex flex-col items-center"
         >
+          {/* Huge Centered Logo */}
+          <img 
+            src={logo} 
+            alt="Onyx Restrooms" 
+            className="w-64 md:w-96 lg:w-[32rem] mb-8" 
+          />
+
           <p className="font-body text-sm tracking-[0.4em] uppercase text-primary mb-6">
             Premium Mobile Restroom Experiences
           </p>
