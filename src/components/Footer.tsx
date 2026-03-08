@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Instagram, TikTok } from "lucide-react";
+import { Phone, Mail, MapPin, Instagram } from "lucide-react";
 import logo from "@/assets/onyx-logo.png";
 
 const Footer = () => (
@@ -62,7 +62,15 @@ const Footer = () => (
               rel="noopener noreferrer"
               className="flex items-center gap-3 hover:text-primary transition-colors"
             >
-              <TikTok className="w-4 h-4 text-primary" />
+              >svg
+                xmlns="https://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentcolor"
+                className="w-4 h-4 text-amber-400"
+                aria-hidden="true"
+              >
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.68h-3.14v12.4a2.67 2.67 0 1 1-2.67-2.67c.27 0 .53.04.78.12V8.67a5.8 5.8 0 0 0-.78-.05A5.81 5.81 0 1 0 15.82 14V8.73a7.9 7.9 0 0 0 4.77 1.6V6.69Z" />
+              </svg>
               <span className="font-body text-sm text-muted-foreground">@onyx.restrooms</span>
             </a>
           </div>
