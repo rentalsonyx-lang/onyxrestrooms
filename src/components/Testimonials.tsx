@@ -41,6 +41,36 @@ const reviews = [
     date: "5 months ago",
     color: "bg-teal-500"
   },
+  { 
+    name: "Gagan S.", 
+    text: "Unreal setup. We had a backyard party and this trailer was literally nicer than the actual house's washroom.", 
+    date: "6 months ago",
+    color: "bg-red-500"
+  },
+  { 
+    name: "Simran K.", 
+    text: "So clean and aesthetic! Perfect for my mehndi night. Everyone was taking mirror selfies in there all night long.", 
+    date: "7 months ago",
+    color: "bg-pink-500"
+  },
+  { 
+    name: "Harkirat B.", 
+    text: "Top tier service. They pulled up, set it up perfectly, and the AC was blasting. 10/10.", 
+    date: "8 months ago",
+    color: "bg-indigo-500"
+  },
+  { 
+    name: "Manpreet D.", 
+    text: "Bro the interior is crazy. Felt like I was in a 5 star hotel. Highly recommend Onyx.", 
+    date: "10 months ago",
+    color: "bg-cyan-600"
+  },
+  { 
+    name: "Sunny M.", 
+    text: "Absolute game changer for outdoor events. No more stinky porta potties. Best decision we made for the reception.", 
+    date: "1 year ago",
+    color: "bg-yellow-500"
+  }
 ];
 
 const Testimonials = () => {
@@ -69,7 +99,6 @@ const Testimonials = () => {
             className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 rounded-full shadow-sm hover:shadow-md transition-shadow"
           >
             <GoogleLogo />
-            {/* Forced the text to be black here */}
             <span className="font-body text-sm font-medium text-black">
               Read all reviews on Google
             </span>
@@ -81,6 +110,7 @@ const Testimonials = () => {
         <div className="absolute top-0 bottom-0 left-0 w-16 md:w-32 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
         <div className="absolute top-0 bottom-0 right-0 w-16 md:w-32 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
 
+        {/* The Track (Pauses on hover) */}
         <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
           {[...reviews, ...reviews].map((review, index) => (
             <div 
@@ -93,11 +123,10 @@ const Testimonials = () => {
                     {review.name.charAt(0)}
                   </div>
                   <div>
-                    {/* Forced the reviewer name to be black */}
-                    <div className="font-display font-medium text-sm text-black leading-tight">
+                    {/* CHANGED: font-display to font-body, and font-medium to font-bold */}
+                    <div className="font-body font-bold text-sm text-black leading-tight">
                       {review.name}
                     </div>
-                    {/* Forced the date to be a visible gray */}
                     <div className="font-body text-xs text-gray-500 mt-0.5">
                       {review.date}
                     </div>
@@ -112,7 +141,6 @@ const Testimonials = () => {
                 ))}
               </div>
               
-              {/* Forced the review text to be black */}
               <p className="font-body text-sm text-black leading-relaxed flex-grow">
                 {review.text}
               </p>
@@ -122,12 +150,13 @@ const Testimonials = () => {
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
+        /* Adjusted the animation timing to 60s since the track is much longer now */
         @keyframes marquee {
           0% { transform: translateX(0%); }
           100% { transform: translateX(-50%); }
         }
         .animate-marquee {
-          animation: marquee 35s linear infinite;
+          animation: marquee 60s linear infinite;
         }
       `}} />
     </section>
