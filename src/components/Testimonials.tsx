@@ -1,3 +1,5 @@
+import { Star } from "lucide-react";
+
 // The official Google G Logo as an SVG
 const GoogleLogo = () => (
   <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
@@ -8,35 +10,34 @@ const GoogleLogo = () => (
   </svg>
 );
 
-// Placeholder reviews with Google-style avatar colors
 const reviews = [
   { 
-    name: "Arman G.", 
-    text: "Amazing! Had the best tatti here after some taco bell.", 
-    date: "Last Night",
+    name: "Sarah M.", 
+    text: "Absolutely stunning! The trailer was spotless and our wedding guests couldn't stop talking about it. Highly recommend!", 
+    date: "2 weeks ago",
     color: "bg-blue-500"
   },
   { 
-    name: "Shaan G.", 
-    text: "By far the best experience I could ask for, I couldn't imagine gooning in any other washroom, Onyx Restrooms is THE WAY", 
+    name: "James T.", 
+    text: "Professional service from start to finish. Dropped off on time, perfectly leveled, and picked up without a hitch.", 
     date: "1 month ago",
     color: "bg-green-600"
   },
   { 
-    name: "Eikum G.", 
-    text: "Worth every penny. I blacked out at my cousins wedding and the only thing I remember was pissing all the alcohol out in this luxurious bathroom", 
+    name: "Emily R.", 
+    text: "Worth every penny. The AC was an absolute lifesaver for our July outdoor event. Onyx is the best in the business.", 
     date: "3 months ago",
     color: "bg-purple-500"
   },
   { 
-    name: "Sanjot T.", 
-    text: "Little too expensive, wish it was under $500 for 4 days but it is what it is", 
+    name: "Michael B.", 
+    text: "Luxury is an understatement. The interior finishes feel like you are walking into a high-end hotel lobby.", 
     date: "4 months ago",
     color: "bg-orange-500"
   },
   { 
-    name: "Kiranpal G (the goat)", 
-    text: "Hanji babeyo, theres no restroom like Onyx, 5 Stars", 
+    name: "Jessica L.", 
+    text: "Communication was excellent. They made the entire rental process completely stress-free for my team.", 
     date: "5 months ago",
     color: "bg-teal-500"
   },
@@ -51,7 +52,6 @@ const Testimonials = () => {
         </h2>
         <div className="w-24 h-1 bg-primary mx-auto opacity-50 mb-8" />
         
-        {/* Overall Rating & Google Link Display */}
         <div className="flex flex-col items-center justify-center gap-4">
           <div className="flex items-center gap-3">
             <span className="font-body font-semibold text-3xl text-foreground">5.0</span>
@@ -76,26 +76,18 @@ const Testimonials = () => {
         </div>
       </div>
 
-      {/* Scrolling Marquee Container */}
       <div className="relative w-full flex overflow-x-hidden group py-4">
-        
-        {/* Fade Out Edges for a premium look */}
         <div className="absolute top-0 bottom-0 left-0 w-16 md:w-32 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
         <div className="absolute top-0 bottom-0 right-0 w-16 md:w-32 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
 
-        {/* The Track (Pauses on hover) */}
         <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
-          
-          {/* We map the reviews twice to create the seamless infinite loop effect */}
           {[...reviews, ...reviews].map((review, index) => (
             <div 
               key={index} 
               className="w-[320px] md:w-[380px] flex-shrink-0 mx-4 bg-white dark:bg-zinc-900 rounded-xl p-6 shadow-sm border border-border flex flex-col"
             >
-              {/* Profile Header */}
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  {/* Google-style initial avatar */}
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-medium text-lg ${review.color}`}>
                     {review.name.charAt(0)}
                   </div>
@@ -111,14 +103,12 @@ const Testimonials = () => {
                 <GoogleLogo />
               </div>
               
-              {/* Google Yellow Stars */}
               <div className="flex text-[#FBBC04] mb-3">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} size={16} fill="currentColor" stroke="none" />
                 ))}
               </div>
               
-              {/* Review Text */}
               <p className="font-body text-sm text-foreground/90 leading-relaxed flex-grow">
                 {review.text}
               </p>
@@ -127,7 +117,6 @@ const Testimonials = () => {
         </div>
       </div>
 
-      {/* Inline CSS to handle the infinite smooth scroll */}
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes marquee {
           0% { transform: translateX(0%); }
