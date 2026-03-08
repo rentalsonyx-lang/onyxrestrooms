@@ -7,7 +7,7 @@ import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import emailjs from '@emailjs/browser'; 
+import emailjs from '@emailjs/browser'; // Added EmailJS import
 
 const QuoteForm = () => {
   const [form, setForm] = useState({
@@ -20,6 +20,7 @@ const QuoteForm = () => {
   });
   
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
+  // Added a loading state so users don't spam the button
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,10 +32,12 @@ const QuoteForm = () => {
 
     setIsSubmitting(true);
 
+    // Format the date range into a readable string for the email
     const formattedDates = dateRange.to
       ? `${format(dateRange.from, "MMM d, yyyy")} - ${format(dateRange.to, "MMM d, yyyy")}`
       : format(dateRange.from, "MMM d, yyyy");
 
+    // Package the form data to match your EmailJS template variables exactly
     const templateParams = {
       name: form.name,
       email: form.email,
@@ -45,16 +48,18 @@ const QuoteForm = () => {
       date_range: formattedDates,
     };
 
+    // SEND THE EMAIL
     emailjs.send(
-      'YOUR_SERVICE_ID',   
-      'YOUR_TEMPLATE_ID',  
+      'service_fma1vts',   // <-- Replace this!
+      'template_a2152rm',  // <-- Replace this!
       templateParams,
-      'YOUR_PUBLIC_KEY'    
+      '5a54xRpOdKy5x-0GD'    // <-- Replace this!
     )
     .then(() => {
       toast.success("Thank you! We'll be in touch within 24 hours.", {
         description: "Your quote request has been received.",
       });
+      // Clear the form on success
       setForm({ name: "", email: "", phone: "", eventType: "", guestCount: "", message: "" });
       setDateRange(undefined);
     })
@@ -157,12 +162,6 @@ const QuoteForm = () => {
                       initialFocus
                       numberOfMonths={1}
                       className={cn("p-3 pointer-events-auto")}
-                      classNames={{
-                        // 1. Transparent gold fill for the dates in between
-                        day_range_middle: "aria-selected:bg-primary/20 aria-selected:text-foreground",
-                        // 2. Make Today super obvious with a thick border
-                        day_today: "border-2 border-primary text-primary font-bold bg-background",
-                      }}
                     />
                   </PopoverContent>
                 </Popover>
@@ -190,7 +189,6 @@ const QuoteForm = () => {
                   name="guestCount"
                   placeholder="Estimated Guest Count *"
                   required
-                  min="1" // FIXED: Added min attribute so it cannot go below 1
                   value={form.guestCount}
                   onChange={handleChange}
                   className={inputClass}
