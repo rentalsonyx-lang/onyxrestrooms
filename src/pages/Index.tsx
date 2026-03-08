@@ -3,9 +3,9 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Fleet from "@/components/Fleet";
 import Features from "@/components/Features";
-import QuoteForm from "@/components/QuoteForm"; // Moved up!
-import Testimonials from "@/components/Testimonials"; // Moved below form
-import FAQ from "@/components/FAQ"; // Moved below form
+import QuoteForm from "@/components/QuoteForm";
+import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import MobileStickyFooter from "@/components/MobileStickyFooter";
 
@@ -16,14 +16,9 @@ const Index = () => (
     <About />
     <Fleet />
     <Features />
-    
-    {/* The Ask: Right after they see how nice the trailer is */}
     <QuoteForm /> 
-    
-    {/* The Social Proof & Reassurance: For people who kept scrolling */}
     <Testimonials />
     <FAQ />
-    
     <Footer />
     <MobileStickyFooter />
   </div>
