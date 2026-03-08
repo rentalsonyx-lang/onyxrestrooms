@@ -16,7 +16,6 @@ const Hero = () => {
       <div className="absolute inset-0 bg-background/75" />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
 
-      {/* Added pt-20 to ensure it doesn't overlap the new centered navbar */}
       <div className="relative z-10 container mx-auto px-6 text-center pt-20">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -24,16 +23,18 @@ const Hero = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          {/* Huge Centered Logo */}
+          {/* Huge Centered Logo - Increased margin below it slightly to mb-10 */}
           <img 
             src={logo} 
             alt="Onyx Restrooms" 
-            className="w-64 md:w-96 lg:w-[32rem] mb-8" 
+            className="w-64 md:w-96 lg:w-[32rem] mb-10" 
           />
 
-          <p className="font-body text-sm tracking-[0.4em] uppercase text-primary mb-6">
+          {/* Subtitle - Increased bottom margin to mb-12 to create more space before the main heading */}
+          <p className="font-body text-sm tracking-[0.4em] uppercase text-primary mb-12">
             Premium Mobile Restroom Experiences
           </p>
+          
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
             <span className="gold-text">Luxury</span>{" "}
             <span className="text-foreground">Restroom</span>
