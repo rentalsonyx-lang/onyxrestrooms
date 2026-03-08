@@ -6,7 +6,7 @@ const Footer = () => (
     <div className="container mx-auto px-6">
       <div className="grid md:grid-cols-3 gap-12 mb-12">
         <div>
-          {/* Increased logo size here (h-24 on mobile, h-32 on desktop) */}
+          {/* Logo size increased here to h-24 on mobile and h-32 on desktop */}
           <img src={logo} alt="Onyx Restrooms" className="h-24 md:h-32 mb-6" />
           <p className="font-body text-sm text-muted-foreground leading-relaxed">
             Premium luxury restroom trailer rentals for events that demand excellence.
