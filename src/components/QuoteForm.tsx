@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
+import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -16,19 +17,21 @@ const QuoteForm = () => {
     guestCount: "",
     message: "",
   });
-  const [dates, setDates] = useState<Date[]>([]);
+  
+  // Changed state to hold a DateRange object instead of an array of dates
+  const [dateRange, setDateRange] = useState<DateRange | undefined>();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (dates.length === 0) {
-      toast.error("Please select at least one event date.");
+    if (!dateRange?.from) {
+      toast.error("Please select an event date.");
       return;
     }
     toast.success("Thank you! We'll be in touch within 24 hours.", {
       description: "Your quote request has been received.",
     });
     setForm({ name: "", email: "", phone: "", eventType: "", guestCount: "", message: "" });
-    setDates([]);
+    setDateRange(undefined);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -78,6 +81,7 @@ const QuoteForm = () => {
                   className={inputClass}
                 />
               </div>
+              
               <div className="grid md:grid-cols-2 gap-5">
                 <input
                   type="tel"
@@ -94,31 +98,37 @@ const QuoteForm = () => {
                       className={cn(
                         inputClass,
                         "flex items-center justify-between text-left",
-                        dates.length === 0 && "text-muted-foreground"
+                        !dateRange?.from && "text-muted-foreground"
                       )}
                     >
                       <span className="truncate">
-                        {dates.length === 0
-                          ? "Event Date(s) *"
-                          : dates.length === 1
-                          ? format(dates[0], "MMM d, yyyy")
-                          : `${dates.length} days selected`}
+                        {!dateRange?.from ? (
+                          "Event Date(s) *"
+                        ) : dateRange.to ? (
+                          <>
+                            {format(dateRange.from, "MMM d, yyyy")} - {format(dateRange.to, "MMM d, yyyy")}
+                          </>
+                        ) : (
+                          format(dateRange.from, "MMM d, yyyy")
+                        )}
                       </span>
                       <CalendarIcon className="w-4 h-4 shrink-0 ml-2 text-muted-foreground" />
                     </button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
-                      mode="multiple"
-                      selected={dates}
-                      onSelect={(days) => setDates(days || [])}
-                      disabled={(date) => date < new Date()}
+                      mode="range"
+                      selected={dateRange}
+                      onSelect={setDateRange}
+                      disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
                       initialFocus
+                      numberOfMonths={1}
                       className={cn("p-3 pointer-events-auto")}
                     />
                   </PopoverContent>
                 </Popover>
               </div>
+
               <div className="grid md:grid-cols-2 gap-5">
                 <select
                   name="eventType"
@@ -146,6 +156,7 @@ const QuoteForm = () => {
                   className={inputClass}
                 />
               </div>
+              
               <textarea
                 name="message"
                 placeholder="Tell us about your event..."
@@ -154,6 +165,7 @@ const QuoteForm = () => {
                 onChange={handleChange}
                 className={inputClass}
               />
+              
               <button
                 type="submit"
                 className="w-full gold-gradient font-body text-sm tracking-widest uppercase px-10 py-4 text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
