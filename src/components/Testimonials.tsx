@@ -12,32 +12,32 @@ const GoogleLogo = () => (
 
 const reviews = [
   { 
-    name: "Sarah M.", 
-    text: "Absolutely stunning! The trailer was spotless and our wedding guests couldn't stop talking about it. Highly recommend!", 
-    date: "2 weeks ago",
+    name: "Arman G.", 
+    text: "Amazing! Had the best tatti here after some taco bell.", 
+    date: "Last Night",
     color: "bg-blue-500"
   },
   { 
-    name: "James T.", 
-    text: "Professional service from start to finish. Dropped off on time, perfectly leveled, and picked up without a hitch.", 
+    name: "Shaan G.", 
+    text: "By far the best experience I could ask for, I couldn't imagine gooning in any other washroom, Onyx Restrooms is THE WAY", 
     date: "1 month ago",
     color: "bg-green-600"
   },
   { 
-    name: "Emily R.", 
-    text: "Worth every penny. The AC was an absolute lifesaver for our July outdoor event. Onyx is the best in the business.", 
+    name: "Eikum G.", 
+    text: "Worth every penny. I blacked out at my cousins wedding and the only thing I remember was pissing all the alcohol out in this luxurious bathroom", 
     date: "3 months ago",
     color: "bg-purple-500"
   },
   { 
-    name: "Michael B.", 
-    text: "Luxury is an understatement. The interior finishes feel like you are walking into a high-end hotel lobby.", 
+    name: "Sanjot T.", 
+    text: "Little too expensive, wish it was under $500 for 4 days but it is what it is", 
     date: "4 months ago",
     color: "bg-orange-500"
   },
   { 
-    name: "Jessica L.", 
-    text: "Communication was excellent. They made the entire rental process completely stress-free for my team.", 
+    name: "Kiranpal G (the goat)", 
+    text: "Hanji babeyo, theres no restroom like Onyx, 5 Stars", 
     date: "5 months ago",
     color: "bg-teal-500"
   },
@@ -66,10 +66,11 @@ const Testimonials = () => {
             href="https://www.google.com/search?q=Onyx+Restrooms&rlz=1C5CHFA_enCA1073CA1073&oq=onyx+restrooms&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgoIARAAGKIEGIkFMgoIAhAAGIAEGKIEMgoIAxAAGIAEGKIEMgcIBBAAGO8FMgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEIMjEwM2owajeoAgCwAgA&sourceid=chrome&ie=UTF-8"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-zinc-900 border border-border rounded-full shadow-sm hover:shadow-md transition-shadow"
+            className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 rounded-full shadow-sm hover:shadow-md transition-shadow"
           >
             <GoogleLogo />
-            <span className="font-body text-sm font-medium text-foreground">
+            {/* Forced the text to be black here */}
+            <span className="font-body text-sm font-medium text-black">
               Read all reviews on Google
             </span>
           </a>
@@ -84,7 +85,7 @@ const Testimonials = () => {
           {[...reviews, ...reviews].map((review, index) => (
             <div 
               key={index} 
-              className="w-[320px] md:w-[380px] flex-shrink-0 mx-4 bg-white dark:bg-zinc-900 rounded-xl p-6 shadow-sm border border-border flex flex-col"
+              className="w-[320px] md:w-[380px] flex-shrink-0 mx-4 bg-white rounded-xl p-6 shadow-sm border border-gray-200 flex flex-col"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -92,10 +93,12 @@ const Testimonials = () => {
                     {review.name.charAt(0)}
                   </div>
                   <div>
-                    <div className="font-display font-medium text-sm text-foreground leading-tight">
+                    {/* Forced the reviewer name to be black */}
+                    <div className="font-display font-medium text-sm text-black leading-tight">
                       {review.name}
                     </div>
-                    <div className="font-body text-xs text-muted-foreground mt-0.5">
+                    {/* Forced the date to be a visible gray */}
+                    <div className="font-body text-xs text-gray-500 mt-0.5">
                       {review.date}
                     </div>
                   </div>
@@ -109,7 +112,8 @@ const Testimonials = () => {
                 ))}
               </div>
               
-              <p className="font-body text-sm text-foreground/90 leading-relaxed flex-grow">
+              {/* Forced the review text to be black */}
+              <p className="font-body text-sm text-black leading-relaxed flex-grow">
                 {review.text}
               </p>
             </div>
