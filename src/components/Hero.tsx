@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Phone } from "lucide-react"; // Imported the Phone icon
 import trailerImage from "@/assets/onyx-trailer.jpg";
 import logo from "@/assets/onyx-logo.png";
 
@@ -23,14 +24,12 @@ const Hero = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          {/* Huge Centered Logo - Increased margin below it slightly to mb-10 */}
           <img 
             src={logo} 
             alt="Onyx Restrooms" 
             className="w-64 md:w-96 lg:w-[32rem] mb-10" 
           />
 
-          {/* Subtitle - Increased bottom margin to mb-12 to create more space before the main heading */}
           <p className="font-body text-sm tracking-[0.4em] uppercase text-primary mb-12">
             Premium Mobile Restroom Experiences
           </p>
@@ -53,17 +52,19 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
+          {/* NEW CLICKABLE PHONE BUTTON */}
+          <a
+            href="tel:+16473953620"
+            className="flex items-center justify-center gap-3 gold-gradient font-body text-sm tracking-widest uppercase px-10 py-4 text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+          >
+            <Phone size={18} /> Call 647-395-3620
+          </a>
+          
           <button
             onClick={scrollToQuote}
-            className="gold-gradient font-body text-sm tracking-widest uppercase px-10 py-4 text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
-          >
-            Request a Quote
-          </button>
-          <button
-            onClick={() => document.getElementById("fleet")?.scrollIntoView({ behavior: "smooth" })}
             className="border border-primary/30 font-body text-sm tracking-widest uppercase px-10 py-4 text-primary font-medium hover:bg-primary/5 transition-colors"
           >
-            View Our Trailer
+            Request a Quote
           </button>
         </motion.div>
       </div>
