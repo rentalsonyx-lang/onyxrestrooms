@@ -47,22 +47,22 @@ const Footer = () => (
               <span className="font-body text-sm text-muted-foreground">rentals.onyx@gmail.com</span>
             </div>
             <a
-              href="https://www.tiktok.com/@onyx.restrooms"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 hover:text-primary transition-colors"
-            >
-              <Phone className="w-4 h-4 text-primary" />
-              <span className="font-body text-sm text-muted-foreground">@onyx.restrooms</span>
-            </a>
-
-            <a
               href="https://instagram.com/onyx.restrooms"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 hover:text-primary transition-colors"
             >
               <Instagram className="w-4 h-4 text-primary" />
+              <span className="font-body text-sm text-muted-foreground">@onyx.restrooms</span>
+            </a>
+
+            <a
+              href="https://www.tiktok.com/@onyx.restrooms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 hover:text-primary transition-colors"
+            >
+              <Phone className="w-4 h-4 text-primary" />
               <span className="font-body text-sm text-muted-foreground">@onyx.restrooms</span>
             </a>
           </div>
