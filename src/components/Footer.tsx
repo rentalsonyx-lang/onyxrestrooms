@@ -44,7 +44,11 @@ const Footer = () => (
             </div>
             <div className="flex items-center gap-3">
               <Mail className="w-4 h-4 text-primary" />
-              <span className="font-body text-sm text-muted-foreground">rental.onyx@gmail.com</span>
+              <span className="font-body text-sm text-muted-foreground">rentals.onyx@gmail.com</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Mail className="w-4 h-4 text-primary" />
+              <span className="font-body text-sm text-muted-foreground">onyx.restrooms</span>
             </div>
             <a
               href="https://instagram.com/onyx.restrooms"
