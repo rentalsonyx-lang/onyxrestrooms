@@ -20,9 +20,11 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      <div className="container mx-auto px-6 flex items-center justify-between h-16">
+      {/* INCREASED HEADER BAR HEIGHT: h-20 on mobile, h-24 on desktop */}
+      <div className="container mx-auto px-6 flex items-center justify-between h-20 md:h-24">
         <a href="#" className="flex items-center">
-          <img src={logo} alt="Onyx Restrooms" className="h-10" />
+          {/* INCREASED LOGO SIZE: h-14 on mobile, h-20 on desktop */}
+          <img src={logo} alt="Onyx Restrooms" className="h-14 md:h-20" />
         </a>
 
         <div className="hidden md:flex items-center gap-8">
