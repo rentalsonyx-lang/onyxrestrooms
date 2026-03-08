@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Instagram } from "lucide-react";
+import { Phone, Mail, MapPin, Instagram, TikTok } from "lucide-react";
 import logo from "@/assets/onyx-logo.png";
 
 const Footer = () => (
@@ -62,7 +62,7 @@ const Footer = () => (
               rel="noopener noreferrer"
               className="flex items-center gap-3 hover:text-primary transition-colors"
             >
-              <Phone className="w-4 h-4 text-primary" />
+              <TikTok className="w-4 h-4 text-primary" />
               <span className="font-body text-sm text-muted-foreground">@onyx.restrooms</span>
             </a>
           </div>
