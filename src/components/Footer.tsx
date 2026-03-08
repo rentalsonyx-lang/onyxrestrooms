@@ -46,10 +46,16 @@ const Footer = () => (
               <Mail className="w-4 h-4 text-primary" />
               <span className="font-body text-sm text-muted-foreground">rentals.onyx@gmail.com</span>
             </div>
-            <div className="flex items-center gap-3">
-              <Mail className="w-4 h-4 text-primary" />
-              <span className="font-body text-sm text-muted-foreground">onyx.restrooms</span>
-            </div>
+            <a
+              href="https://www.tiktok.com/@onyx.restrooms?is_from_webapp=1&sender_device=pc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 hover:text-primary transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <Mail className="w-4 h-4 text-primary" />
+                <span className="font-body text-sm text-muted-foreground">onyx.restrooms</span>
+              </div>
             <a
               href="https://instagram.com/onyx.restrooms"
               target="_blank"
