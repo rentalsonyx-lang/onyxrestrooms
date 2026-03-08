@@ -1,28 +1,64 @@
-import { NavLink as RouterNavLink, NavLinkProps } from "react-router-dom";
-import { forwardRef } from "react";
-import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/onyx-logo.png";
 
-interface NavLinkCompatProps extends Omit<NavLinkProps, "className"> {
-  className?: string;
-  activeClassName?: string;
-  pendingClassName?: string;
-}
+const links = [
+  { label: "About", href: "#about" },
+  { label: "Our Trailer", href: "#fleet" },
+  { label: "Features", href: "#features" },
+  { label: "Testimonials", href: "#testimonials" },
+  { label: "Get a Quote", href: "#quote" },
+];
 
-const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
-  ({ className, activeClassName, pendingClassName, to, ...props }, ref) => {
-    return (
-      <RouterNavLink
-        ref={ref}
-        to={to}
-        className={({ isActive, isPending }) =>
-          cn(className, isActive && activeClassName, isPending && pendingClassName)
-        }
-        {...props}
-      />
-    );
-  },
-);
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
 
-NavLink.displayName = "NavLink";
+  const handleClick = (href: string) => {
+    setOpen(false);
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+  };
 
-export { NavLink };
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      {/* Changed h-16 to py-4 to accommodate the taller logo */}
+      <div className="container mx-auto px-6 flex items-center justify-between py-4">
+        <a href="#" className="flex items-center">
+          {/* Increased logo size here (h-16 on mobile, h-20 on larger screens) */}
+          <img src={logo} alt="Onyx Restrooms" className="h-16 md:h-20" />
+        </a>
+
+        <div className="hidden md:flex items-center gap-8">
+          {links.map((link) => (
+            <button
+              key={link.href}
+              onClick={() => handleClick(link.href)}
+              className="font-body text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition-colors"
+            >
+              {link.label}
+            </button>
+          ))}
+        </div>
+
+        <button onClick={() => setOpen(!open)} className="md:hidden text-foreground">
+          {open ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {open && (
+        <div className="md:hidden bg-background border-b border-border">
+          {links.map((link) => (
+            <button
+              key={link.href}
+              onClick={() => handleClick(link.href)}
+              className="block w-full text-left px-6 py-3 font-body text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              {link.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;
