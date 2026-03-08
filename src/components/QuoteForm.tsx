@@ -7,7 +7,7 @@ import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import emailjs from '@emailjs/browser'; // Added EmailJS import
+import emailjs from '@emailjs/browser'; 
 
 const QuoteForm = () => {
   const [form, setForm] = useState({
@@ -20,7 +20,6 @@ const QuoteForm = () => {
   });
   
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
-  // Added a loading state so users don't spam the button
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,12 +31,10 @@ const QuoteForm = () => {
 
     setIsSubmitting(true);
 
-    // Format the date range into a readable string for the email
     const formattedDates = dateRange.to
       ? `${format(dateRange.from, "MMM d, yyyy")} - ${format(dateRange.to, "MMM d, yyyy")}`
       : format(dateRange.from, "MMM d, yyyy");
 
-    // Package the form data to match your EmailJS template variables exactly
     const templateParams = {
       name: form.name,
       email: form.email,
@@ -48,18 +45,16 @@ const QuoteForm = () => {
       date_range: formattedDates,
     };
 
-    // SEND THE EMAIL
     emailjs.send(
-      'service_fma1vts',   // <-- Replace this!
-      'template_a2152rm',  // <-- Replace this!
+      'service_fma1vts',   // Your Service ID
+      'template_a2152rm',  // Your Template ID
       templateParams,
-      '5a54xRpOdKy5x-0GD'    // <-- Replace this!
+      '5a54xRpOdKy5x-0GD'  // Your Public Key
     )
     .then(() => {
       toast.success("Thank you! We'll be in touch within 24 hours.", {
         description: "Your quote request has been received.",
       });
-      // Clear the form on success
       setForm({ name: "", email: "", phone: "", eventType: "", guestCount: "", message: "" });
       setDateRange(undefined);
     })
@@ -80,7 +75,26 @@ const QuoteForm = () => {
     "w-full bg-input border border-border px-4 py-3 font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors";
 
   return (
-    <section id="quote" className="py-24 bg-background">
+    <section id="quote" className="py-24 bg-background relative">
+      <style dangerouslySetInnerHTML={{__html: `
+        .custom-today {
+          position: relative;
+          color: hsl(var(--primary)) !important;
+          font-weight: 700;
+          border: 1px solid hsl(var(--primary)) !important;
+        }
+        .custom-today::after {
+          content: "Today";
+          position: absolute;
+          bottom: 2px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 0.45rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+      `}} />
+
       <div className="container mx-auto px-6">
         <div className="max-w-2xl mx-auto">
           <motion.div
@@ -162,6 +176,12 @@ const QuoteForm = () => {
                       initialFocus
                       numberOfMonths={1}
                       className={cn("p-3 pointer-events-auto")}
+                      classNames={{
+                        day_range_start: "aria-selected:bg-primary aria-selected:text-primary-foreground",
+                        day_range_end: "aria-selected:bg-primary aria-selected:text-primary-foreground",
+                        day_range_middle: "aria-selected:bg-primary/20 aria-selected:text-foreground",
+                        day_today: "custom-today bg-background",
+                      }}
                     />
                   </PopoverContent>
                 </Popover>
@@ -189,8 +209,12 @@ const QuoteForm = () => {
                   name="guestCount"
                   placeholder="Estimated Guest Count *"
                   required
+                  min="1"
                   value={form.guestCount}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    if (Number(e.target.value) < 1 && e.target.value !== "") return;
+                    handleChange(e);
+                  }}
                   className={inputClass}
                 />
               </div>
