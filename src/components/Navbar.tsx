@@ -1,11 +1,3 @@
-These are excellent additions. A sticky mobile footer will absolutely drive more calls, and having the logo gracefully fade into the navigation bar as you scroll is a staple of premium web design.
-
-To implement this, we are going to update two existing files and create two brand new files.
-
-1. Update src/components/Navbar.tsx
-Replace your existing code with this. I added a scroll listener (isScrolled) that watches how far down the page you are. Once you scroll past the main hero image, the logo will smoothly fade into the left side of the navigation bar.
-
-TypeScript
 import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import logo from "@/assets/onyx-logo.png";
