@@ -46,10 +46,10 @@ const QuoteForm = () => {
     };
 
     emailjs.send(
-      'service_fma1vts',   // Your Service ID
-      'template_a2152rm',  // Your Template ID
+      'service_fma1vts',   
+      'template_a2152rm',  
       templateParams,
-      '5a54xRpOdKy5x-0GD'  // Your Public Key
+      '5a54xRpOdKy5x-0GD'  
     )
     .then(() => {
       toast.success("Thank you! We'll be in touch within 24 hours.", {
@@ -76,25 +76,6 @@ const QuoteForm = () => {
 
   return (
     <section id="quote" className="py-24 bg-background relative">
-      <style dangerouslySetInnerHTML={{__html: `
-        .custom-today {
-          position: relative;
-          color: hsl(var(--primary)) !important;
-          font-weight: 700;
-          border: 1px solid hsl(var(--primary)) !important;
-        }
-        .custom-today::after {
-          content: "Today";
-          position: absolute;
-          bottom: 2px;
-          left: 50%;
-          transform: translateX(-50%);
-          font-size: 0.45rem;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-      `}} />
-
       <div className="container mx-auto px-6">
         <div className="max-w-2xl mx-auto">
           <motion.div
@@ -177,10 +158,11 @@ const QuoteForm = () => {
                       numberOfMonths={1}
                       className={cn("p-3 pointer-events-auto")}
                       classNames={{
+                        // Solid start and end dates
                         day_range_start: "aria-selected:bg-primary aria-selected:text-primary-foreground",
                         day_range_end: "aria-selected:bg-primary aria-selected:text-primary-foreground",
-                        day_range_middle: "aria-selected:bg-primary/20 aria-selected:text-foreground",
-                        day_today: "custom-today bg-background",
+                        // 15% transparent background for middle dates, leaves text color completely alone
+                        day_range_middle: "aria-selected:bg-primary/15",
                       }}
                     />
                   </PopoverContent>
