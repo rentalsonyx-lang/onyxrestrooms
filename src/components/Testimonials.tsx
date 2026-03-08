@@ -110,7 +110,6 @@ const Testimonials = () => {
         <div className="absolute top-0 bottom-0 left-0 w-16 md:w-32 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
         <div className="absolute top-0 bottom-0 right-0 w-16 md:w-32 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
 
-        {/* The Track (Pauses on hover) */}
         <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
           {[...reviews, ...reviews].map((review, index) => (
             <div 
@@ -123,8 +122,8 @@ const Testimonials = () => {
                     {review.name.charAt(0)}
                   </div>
                   <div>
-                    {/* CHANGED: font-display to font-body, and font-medium to font-bold */}
-                    <div className="font-body font-bold text-sm text-black leading-tight">
+                    {/* CHANGED: Swapped font-bold to font-medium to make it thinner */}
+                    <div className="font-body font-medium text-sm text-black leading-tight">
                       {review.name}
                     </div>
                     <div className="font-body text-xs text-gray-500 mt-0.5">
@@ -150,7 +149,6 @@ const Testimonials = () => {
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
-        /* Adjusted the animation timing to 60s since the track is much longer now */
         @keyframes marquee {
           0% { transform: translateX(0%); }
           100% { transform: translateX(-50%); }
