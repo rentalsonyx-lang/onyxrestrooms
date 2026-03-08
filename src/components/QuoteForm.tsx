@@ -7,6 +7,7 @@ import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import emailjs from '@emailjs/browser'; 
 
 const QuoteForm = () => {
   const [form, setForm] = useState({
@@ -18,8 +19,8 @@ const QuoteForm = () => {
     message: "",
   });
   
-  // Changed state to hold a DateRange object instead of an array of dates
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,11 +28,43 @@ const QuoteForm = () => {
       toast.error("Please select an event date.");
       return;
     }
-    toast.success("Thank you! We'll be in touch within 24 hours.", {
-      description: "Your quote request has been received.",
+
+    setIsSubmitting(true);
+
+    const formattedDates = dateRange.to
+      ? `${format(dateRange.from, "MMM d, yyyy")} - ${format(dateRange.to, "MMM d, yyyy")}`
+      : format(dateRange.from, "MMM d, yyyy");
+
+    const templateParams = {
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      eventType: form.eventType,
+      guestCount: form.guestCount,
+      message: form.message,
+      date_range: formattedDates,
+    };
+
+    emailjs.send(
+      'YOUR_SERVICE_ID',   
+      'YOUR_TEMPLATE_ID',  
+      templateParams,
+      'YOUR_PUBLIC_KEY'    
+    )
+    .then(() => {
+      toast.success("Thank you! We'll be in touch within 24 hours.", {
+        description: "Your quote request has been received.",
+      });
+      setForm({ name: "", email: "", phone: "", eventType: "", guestCount: "", message: "" });
+      setDateRange(undefined);
+    })
+    .catch((error) => {
+      console.error('EmailJS Error:', error);
+      toast.error("Something went wrong. Please try again or call us directly at 647-395-3620.");
+    })
+    .finally(() => {
+      setIsSubmitting(false);
     });
-    setForm({ name: "", email: "", phone: "", eventType: "", guestCount: "", message: "" });
-    setDateRange(undefined);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -124,6 +157,12 @@ const QuoteForm = () => {
                       initialFocus
                       numberOfMonths={1}
                       className={cn("p-3 pointer-events-auto")}
+                      classNames={{
+                        // 1. Transparent gold fill for the dates in between
+                        day_range_middle: "aria-selected:bg-primary/20 aria-selected:text-foreground",
+                        // 2. Make Today super obvious with a thick border
+                        day_today: "border-2 border-primary text-primary font-bold bg-background",
+                      }}
                     />
                   </PopoverContent>
                 </Popover>
@@ -151,6 +190,7 @@ const QuoteForm = () => {
                   name="guestCount"
                   placeholder="Estimated Guest Count *"
                   required
+                  min="1" // FIXED: Added min attribute so it cannot go below 1
                   value={form.guestCount}
                   onChange={handleChange}
                   className={inputClass}
@@ -168,9 +208,10 @@ const QuoteForm = () => {
               
               <button
                 type="submit"
-                className="w-full gold-gradient font-body text-sm tracking-widest uppercase px-10 py-4 text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                disabled={isSubmitting}
+                className="w-full gold-gradient font-body text-sm tracking-widest uppercase px-10 py-4 text-primary-foreground font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
               >
-                Submit Quote Request
+                {isSubmitting ? "Sending..." : "Submit Quote Request"}
               </button>
             </form>
           </motion.div>
