@@ -6,8 +6,7 @@ const Footer = () => (
     <div className="container mx-auto px-6">
       <div className="grid md:grid-cols-3 gap-12 mb-12">
         <div>
-          {/* Logo size increased here to h-24 on mobile and h-32 on desktop */}
-          <img src={logo} alt="Onyx Restrooms" className="h-24 md:h-32 mb-6" />
+          <img src={logo} alt="Onyx Restrooms" className="h-12 mb-4" />
           <p className="font-body text-sm text-muted-foreground leading-relaxed">
             Premium luxury restroom trailer rentals for events that demand excellence.
           </p>
@@ -64,7 +63,7 @@ const Footer = () => (
               className="flex items-center gap-3 hover:text-primary transition-colors"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
+                xmlns="https://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 className="w-4 h-4 text-amber-400"
