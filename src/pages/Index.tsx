@@ -3,23 +3,27 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Fleet from "@/components/Fleet";
 import Features from "@/components/Features";
-import FAQ from "@/components/FAQ"; // Added FAQ
-import Testimonials from "@/components/Testimonials";
-import QuoteForm from "@/components/QuoteForm";
+import QuoteForm from "@/components/QuoteForm"; // Moved up!
+import Testimonials from "@/components/Testimonials"; // Moved below form
+import FAQ from "@/components/FAQ"; // Moved below form
 import Footer from "@/components/Footer";
-import MobileStickyFooter from "@/components/MobileStickyFooter"; // Added Mobile Footer
+import MobileStickyFooter from "@/components/MobileStickyFooter";
 
 const Index = () => (
-  // Added padding bottom on mobile so the sticky footer doesn't cover content
   <div className="pb-20 md:pb-0"> 
     <Navbar />
     <Hero />
     <About />
     <Fleet />
     <Features />
-    <FAQ />
+    
+    {/* The Ask: Right after they see how nice the trailer is */}
+    <QuoteForm /> 
+    
+    {/* The Social Proof & Reassurance: For people who kept scrolling */}
     <Testimonials />
-    <QuoteForm />
+    <FAQ />
+    
     <Footer />
     <MobileStickyFooter />
   </div>
